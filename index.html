@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOOP X - Basketball Court Appointment System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="Script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>HOOP X - COURT APPOINTMENT SYSTEM</h1>
+        <p>find basketball courts near you</p>
+    </header>
+    <!-- Toolbar for filtering courts -->
+    <div class="toolbar-wrap">
+        <nav class="toolbar" aria-label="Court filters">                                                                                                                                                                                                                                                                
+            <button id="chip-all" class="chip active" type="button" data-filter="all">ALL COURTS</button>
+            <button id="chip-indoor" class="chip" type="button" data-filter="indoor">INDOOR</button>
+            <button id="chip-outdoor" class="chip" type="button" data-filter="outdoor">OUTDOOR</button>
+        </nav>
+    </div>
+    <!-- Search panel and court grid -->
+    <main class="content-shell">
+        <section class="search-panel">
+            <div class="search-row">
+                <input id="search" type="search" placeholder="Search by court or location" aria-label="Search courts">
+                <button id="near-me" type="button">NEAR ME</button>
+            </div>
+            <p id="geo-status" class="geo-status" aria-live="polite"></p>
+        </section>
+
+        <section id="grid" class="court-grid" aria-live="polite"></section>
+    </main>
+    <!-- Court details -->
+    <div id="backdrop" class="backdrop" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-name">
+            <button id="close-modal" class="close-modal" type="button" aria-label="Close">×</button>
+            <img id="m-img" src="" alt="Selected court">
+            <div class="modal-content">
+                <h2 id="m-name"></h2>
+                <p id="m-addr"></p>
+                <a id="m-map" href="#" target="_blank" rel="noopener">GET DIRECTIONS</a>
+                <table class="hours-table" aria-label="Court hours">
+                    <tbody id="m-hours"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appointment form  -->
+    <div id="booking-backdrop" class="backdrop" aria-hidden="true">
+        <section class="modal booking-modal" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+            <button id="close-booking" class="close-modal" type="button" aria-label="Close">×</button>
+            <div class="modal-content">
+                <p class="form-eyebrow">HOOP X COURT RESERVATION</p>
+                <h2 id="booking-title">Set an Appointment</h2>
+                <p id="booking-court-label" class="booking-court-label"></p>
+                <form id="appointment-form">
+                    <input type="hidden" id="booking-venue" name="venue">
+                    <input type="hidden" id="booking-venue-type" name="venue_type">
+                    <div class="form-grid">
+                        <label>First name<input id="first-name" name="name" type="text" maxlength="100" autocomplete="given-name" required></label>
+                        <label>Middle name <span>(optional)</span><input id="middle-name" name="middle_name" type="text" maxlength="100" autocomplete="additional-name"></label>
+                        <label>Last name<input id="last-name" name="last_name" type="text" maxlength="100" autocomplete="family-name" required></label>
+                        <label>Appointment date<input id="appointment-date" name="appointment_date" type="date" required></label>
+                        <label>Start time<input id="start-time" name="start_time" type="time" required></label>
+                        <label>End time<input id="end-time" name="end_time" type="time" required></label>
+                    </div>
+                    <p class="form-note">Choose a start and end time within the court's operating hours. Your appointment will be confirmed automatically if the time is available.</p>
+                    <p id="booking-message" class="booking-message" role="status" aria-live="polite"></p>
+                    <button class="appointment-button" type="submit" id="submit-appointment">CONFIRM APPOINTMENT</button>
+                </form>
+            </div>
+        </section>
+    </div>
+    <!-- Confirmation modal -->
+    <div id="confirmation-backdrop" class="backdrop" aria-hidden="true">
+        <section class="modal confirmation-modal" role="dialog" aria-modal="true" aria-labelledby="confirmation-title">
+            <div class="modal-content">
+                <div class="confirmation-icon">✓</div>
+                <h2 id="confirmation-title">Appointment Confirmed!</h2>
+                <p id="confirmation-details"></p>
+                <p class="reference-line">Reference number: <strong id="confirmation-reference"></strong></p>
+                <button id="close-confirmation" class="appointment-button" type="button">DONE</button>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
